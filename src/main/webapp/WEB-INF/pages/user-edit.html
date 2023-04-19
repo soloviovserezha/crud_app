@@ -7,7 +7,7 @@
         #user_edit {
             position: absolute;
             left: 50%;
-            top: 50%;
+            top: 20%;
             transform: translate(-50%, -50%);
         }
     </style>
@@ -18,13 +18,15 @@
 <body>
 <div id="user_edit" class="container mt-5 mb-5">
     <h1>Edit</h1>
-    <div th:each="element : ${user}" class="alert alert-info mt-2">
-        <form action="/crud_app_war_exploded/users/edit" method="post">
-            <input type="text" th:value="${user.name}" name="nameCase" placeholder="User name" class="form-control"><br>
-            <input type="date" th:value="${user.surname}" name="dateCase" placeholder="User surname" class="form-control"><br>
-            <button type="submit" class="btn btn-success">Edit</button>
-        </form>
-    </div>
+    <form method="post">
+        <label>
+            <input type="text" name="userName" placeholder="user name" class="form-control">
+        </label> <br>
+        <label>
+            <input type="text" name="userSurname" placeholder="user surname" class="form-control">
+        </label> <br>
+        <button type="submit" class="btn btn-success">Edit</button>
+    </form>
 </div>
 </body>
 </html>

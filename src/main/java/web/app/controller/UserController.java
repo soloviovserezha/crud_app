@@ -41,7 +41,8 @@ public class UserController {
     }
 
     @PostMapping("/users/add")
-    public String userAddPost(@RequestParam(name = "userName") String name, @RequestParam(name = "userSurname") String surname) {
+    public String userAddPost(@RequestParam(name = "userName") String name,
+                              @RequestParam(name = "userSurname") String surname) {
         userService.addUser(new User(name, surname));
         return "redirect:/users";
     }
@@ -57,9 +58,11 @@ public class UserController {
                               @RequestParam(name = "userName") String name,
                               @RequestParam(name = "userSurname") String surname,
                               Model model) {
-        model.addAttribute("id", userService.getUserById(id));
-        userService.changeUser(name, surname);
-        return "user-edit";
+        User user = userService.getUserById(id);
+        user.setName(name);
+        user.setSurname(surname);
+        model.addAttribute("user", userService.changeUser(user));
+        return "redirect:/users";
     }
 
     @PostMapping("/users/{id}/remove")
@@ -70,6 +73,7 @@ public class UserController {
 
     @PostMapping("/users/remove")
     public String userDelete() {
+        userService.deleteAllUsers();
         return "redirect:/users";
     }
 }

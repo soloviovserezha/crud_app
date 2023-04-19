@@ -14,7 +14,8 @@ public interface UserService {
 
     List<User> deleteAllUsers();
 
-    User changeUser(String name, String surname);
+//    User changeUser(String name, String surname);
+    User changeUser(User user);
 
     void addUser(User user);
 }

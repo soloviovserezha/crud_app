@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User changeUser(String name, String surname) {
-        return userDao.changeUser(name, surname);
+    public User changeUser(User user) {
+        return userDao.changeUser(user);
     }
 
     @Transactional
