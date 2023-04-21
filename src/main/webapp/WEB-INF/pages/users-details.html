@@ -24,7 +24,7 @@
     <div th:each="element : ${user_id}" class="alert alert-info mt-2">
         <h3 th:text="${element}"></h3>
         <a th:href="'/crud_app_war_exploded/users/' + ${user_id.getId()} + '/edit'" class="btn btn-warning">Edit</a><br><br>
-        <form th:action="'/crud_app_war_exploded/users/' + ${user_id.getId()} + '/remove'" method="post">
+        <form th:action="'/crud_app_war_exploded/users/' + ${user_id.getId()} + '/remove'" th:method="delete">
             <button class="btn btn-warning" type="submit">Delete</button>
         </form>
     </div>

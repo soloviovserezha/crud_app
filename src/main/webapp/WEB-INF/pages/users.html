@@ -21,7 +21,7 @@
 </div>
 <hr>
 <div class="container mt-5 mb-5">
-    <form th:action="'/crud_app_war_exploded/users/remove'" method="post">
+    <form th:action="@{/users/remove}" th:method="delete">
         <button class="btn btn-warning" type="submit">Delete</button>
     </form>
 </div>

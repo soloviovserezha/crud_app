@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,12 +19,14 @@
 <body>
 <div id="user_edit" class="container mt-5 mb-5">
     <h1>Edit</h1>
-    <form method="post">
+    <form th:method="PATCH" th:each="el : ${user}"  th:object="${user}">
         <label>
-            <input type="text" name="userName" placeholder="user name" class="form-control">
+            <input type="text" th:value="${user.name}" placeholder="user name" class="form-control"
+                   th:field="*{name}">
         </label> <br>
         <label>
-            <input type="text" name="userSurname" placeholder="user surname" class="form-control">
+            <input type="text" th:value="${user.surname}" placeholder="user surname" class="form-control"
+                   th:field="*{surname}">
         </label> <br>
         <button type="submit" class="btn btn-success">Edit</button>
     </form>

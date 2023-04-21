@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/home")
-    public String getIndex() {
+    public String getHomePage() {
         return "home";
     }
 
@@ -35,44 +35,39 @@ public class UserController {
     }
 
     @GetMapping("/users/add")
-    public String userAddGet() {
+    public String saveUser(Model model) {
+        model.addAttribute("userForm", new User());
+//        model.addAttribute("bookListForm", userService.getUserList());
         userService.getUserList();
         return "user-add";
     }
 
     @PostMapping("/users/add")
-    public String userAddPost(@RequestParam(name = "userName") String name,
-                              @RequestParam(name = "userSurname") String surname) {
-        userService.addUser(new User(name, surname));
+    public String saveUserPost(User user) {
+        userService.addUser(user);
         return "redirect:/users";
     }
 
     @GetMapping("/users/{id}/edit")
-    public String userEdit(@PathVariable(value = "id") Long id, Model model) {
+    public String editUser(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user-edit";
     }
 
-    @PostMapping("/users/{id}/edit")
-    public String userEditUpd(@PathVariable(value = "id") Long id,
-                              @RequestParam(name = "userName") String name,
-                              @RequestParam(name = "userSurname") String surname,
-                              Model model) {
-        User user = userService.getUserById(id);
-        user.setName(name);
-        user.setSurname(surname);
+    @PatchMapping("/users/{id}/edit")
+    public String editUserPost(User user, Model model) {
         model.addAttribute("user", userService.changeUser(user));
         return "redirect:/users";
     }
 
-    @PostMapping("/users/{id}/remove")
-    public String userDeleteById(@PathVariable(value = "id") Long id, Model model) {
+    @DeleteMapping("/users/{id}/remove")
+    public String deleteUserById(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("id", userService.deleteUserById(id));
         return "redirect:/users";
     }
 
-    @PostMapping("/users/remove")
-    public String userDelete() {
+    @DeleteMapping("/users/remove")
+    public String deleteAllUsers() {
         userService.deleteAllUsers();
         return "redirect:/users";
     }

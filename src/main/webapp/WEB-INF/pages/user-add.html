@@ -8,6 +8,7 @@
         #add-form {
             position: absolute;
             left: 50%;
+            top: 30%;
             transform: translate(-50%, -50%);
         }
         body {
@@ -24,13 +25,21 @@
 <body>
     <div id="add-form" class="container mt-5 mb-5">
     <h1>Add user</h1>
-        <form action="/crud_app_war_exploded/users/add" method="post">
-            <label>
-                <input type="text" name="userName" placeholder="user name" class="form-control">
-            </label> <br>
-            <label>
-                <input type="text" name="userSurname" placeholder="user surname" class="form-control">
-            </label> <br>
+        <form method="post" th:action="@{/users/add}" th:object="${userForm}">
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="user name" th:field="*{name}">
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="user surname" th:field="*{surname}">
+                    </td>
+                </tr>
+            </table>
             <button type="submit" class="btn btn-success">Save</button>
         </form>
     </div>

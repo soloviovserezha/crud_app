@@ -39,14 +39,17 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public List<User> deleteAllUsers() {
-        return userDao.deleteAllUsers();
+    public void deleteAllUsers() {
+        userDao.deleteAllUsers();
     }
 
     @Transactional
     @Override
     public User changeUser(User user) {
-        return userDao.changeUser(user);
+        User userChanged = getUserById(user.getId());
+        userChanged.setName(user.getName());
+        userChanged.setSurname(user.getSurname());
+        return userDao.changeUser(userChanged);
     }
 
     @Transactional
