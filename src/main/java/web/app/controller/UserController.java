@@ -8,6 +8,7 @@ import web.app.model.User;
 import web.app.service.UserService;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
@@ -22,50 +23,50 @@ public class UserController {
         return "home";
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public String getAllUsers(Model model) {
         model.addAttribute("users", userService.getUserList());
         return "users";
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public String getUserById(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("user_id", userService.getUserById(id));
         return "users-details";
     }
 
-    @GetMapping("/users/add")
+    @GetMapping("/add")
     public String saveUser(Model model) {
         model.addAttribute("userForm", new User());
         userService.getUserList();
         return "user-add";
     }
 
-    @PostMapping("/users/add")
+    @PostMapping("/add")
     public String saveUserPost(User user) {
         userService.addUser(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/users/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editUser(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user-edit";
     }
 
-    @PatchMapping("/users/{id}/edit")
+    @PatchMapping("/{id}/edit")
     public String editUserPost(User user, Model model) {
         model.addAttribute("user", userService.changeUser(user));
         return "redirect:/users";
     }
 
-    @DeleteMapping("/users/{id}/remove")
+    @DeleteMapping("/{id}/remove")
     public String deleteUserById(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("id", userService.deleteUserById(id));
         return "redirect:/users";
     }
 
-    @DeleteMapping("/users/remove")
+    @DeleteMapping("/remove")
     public String deleteAllUsers() {
         userService.deleteAllUsers();
         return "redirect:/users";

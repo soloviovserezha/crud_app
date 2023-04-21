@@ -19,13 +19,11 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
-    @Transactional
     @Override
     public List<User> getUserList() {
         return userDao.getUserList();
     }
 
-    @Transactional
     @Override
     public User getUserById(Long id) {
         return userDao.getUserById(id);
